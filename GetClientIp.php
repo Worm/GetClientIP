@@ -71,7 +71,7 @@ class GetClientIp
     /**
      * Set the SERVER Headers. This method set IP headers data with sent manually headers array.
      *
-     * @param array $serverHeaders The headers to set. If null, then using PHP's _SERVER to extract the headers.
+     * @param array $serverHeaders The headers to set. If null, then using PHP _SERVER to extract the headers.
      */
     public function setServerHeaders($serverHeaders = [])
     {
@@ -122,7 +122,7 @@ class GetClientIp
      */
     public function validate_ip($ip)
     {
-        if (!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false) {
+        if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
             return true;
         }
 
