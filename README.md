@@ -1,4 +1,4 @@
-*Get_Client_Ip is a lightweight PHP class for get real/original client IP address, without proxy as opera mini and other.
+*GetClientIp is a lightweight PHP class for get real/original client IP address, without proxy as opera mini and other.
 It uses the specific $_SERVER headers to detect client ip address.*
 
 ```

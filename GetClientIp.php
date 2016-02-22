@@ -3,8 +3,9 @@
  * Get Client Ip Library
  * =====================
  *
- * GetClientIp is a lightweight PHP class for detecting client real ip address.
- * It uses specific HTTP headers to detect the real/original (not private/reserved range) client ip address.
+ * GetClientIp is a lightweight PHP class for detecting client IP address.
+ * It uses specific HTTP headers to detect the real/original
+ * (not private/reserved range) client ip address not final proxy IP.
  *
  * @author      Aleksey Pevnev <pevnev@mail.ru>
  *
@@ -51,10 +52,9 @@ class GetClientIp
     /**
      * Construct an instance of this class.
      *
-     * @param array  $headers   Specify the headers as injection. Should be PHP _SERVER flavored.
-     *                          If left empty, will use the global _SERVER['HTTP_*'] vars instead.
+     * @param array  $headers   Specify the headers as injection.
      */
-    public function __construct(array $headers = null) {
+    public function __construct($headers = []) {
         $this->setServerHeaders($headers);
     }
 
@@ -69,12 +69,11 @@ class GetClientIp
     }
 
     /**
-     * Set the HTTP Headers. Must be PHP-flavored. This method will reset existing headers.
+     * Set the SERVER Headers. This method set IP headers data with sent manually headers array.
      *
-     * @param array $serverHeaders The headers to set. If null, then using PHP's _SERVER to extract
-     *                           the headers. The default null is left for backwards compatibilty.
+     * @param array $serverHeaders The headers to set. If null, then using PHP's _SERVER to extract the headers.
      */
-    public function setServerHeaders($serverHeaders = null)
+    public function setServerHeaders($serverHeaders = [])
     {
         // use global _SERVER if $httpHeaders aren't defined
         if (!is_array($serverHeaders) || !count($serverHeaders)) {
@@ -93,7 +92,7 @@ class GetClientIp
     }
 
     /**
-     * Retrieves the HTTP headers.
+     * Retrieves the IP detect headers.
      *
      * @return array
      */
@@ -103,10 +102,10 @@ class GetClientIp
     }
 
     /**
-     * Get all possible HTTP headers that
-     * can contain the User-Agent string.
+     * Get all possible SERVER headers that
+     * can contain the IP address.
      *
-     * @return array List of HTTP headers.
+     * @return array List of SERVER headers.
      */
     public function getIpServerHeaders()
     {
@@ -115,9 +114,9 @@ class GetClientIp
 
     /**
      * Ensures an ip address is both a valid IP and does not fall within
-     * a private network range.
+     * a private or reserved network range.
      *
-     * @param $ip
+     * @param string $ip IP address for test
      *
      * @return bool
      */
@@ -131,16 +130,12 @@ class GetClientIp
     }
 
     /**
-     * @param null  $serverHeaders
+     * Get the real valid IP address from serverHeaders
      *
      * @return bool|string
      */
-    public function getClientIp($serverHeaders = null)
+    public function getClientIp()
     {
-        if ($serverHeaders) {
-            $this->setServerHeaders($serverHeaders);
-        }
-
         foreach ($this->getIpServerHeaders() as $ipHeader) {
             if (isset($this->serverHeaders[$ipHeader])) {
                 foreach (explode(',', $this->serverHeaders[$ipHeader]) as $ip) {
