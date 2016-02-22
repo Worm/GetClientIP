@@ -1,0 +1,26 @@
+{
+  "name": "worm/getclientiplib",
+  "type": "library",
+  "description": "Get_Client_Ip is a lightweight PHP class for get real/original client IP address, without proxy as opera mini and other.",
+  "keywords": ["ip", "ip address", "ip detect", "ip detector", "php ip detect", "detect ip client"],
+  "homepage": "https://github.com/worm/Get-Client-Ip",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Pevnev Alex",
+      "email": "pevnev@mail.ru",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=5.2.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*",
+    "johnkary/phpunit-speedtrap": "~1.0@dev",
+    "codeclimate/php-test-reporter": "dev-master"
+  },
+  "autoload": {
+    "classmap": ["Get_Client_Ip.php"]
+  }
+}
