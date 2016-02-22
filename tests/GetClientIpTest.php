@@ -1,19 +1,19 @@
 <?php
-class Get_Client_Ip_Test extends PHPUnit_Framework_TestCase
+class GetClientIpTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var Get_Client_Ip
+     * @var GetClientIp
      */
     protected $getClientIp;
 
     public function testClassExists()
     {
-        $this->assertTrue(class_exists('Get_Client_Ip'));
+        $this->assertTrue(class_exists('GetClientIp'));
     }
 
     public function setUp()
     {
-        $this->getClientIp = new Get_Client_Ip;
+        $this->getClientIp = new GetClientIp;
     }
 
     protected function tearDown()
@@ -22,9 +22,9 @@ class Get_Client_Ip_Test extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Get_Client_Ip::getScriptVersion
-     * @covers Get_Client_Ip::setServerHeaders
-     * @covers Get_Client_Ip::getServerHeaders
+     * @covers GetClientIp::getScriptVersion
+     * @covers GetClientIp::setServerHeaders
+     * @covers GetClientIp::getServerHeaders
      */
     public function testBasicMethods()
     {
@@ -65,11 +65,11 @@ class Get_Client_Ip_Test extends PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider validIpProvider
-     * @covers Get_Client_Ip::validate_ip
+     * @covers GetClientIp::validate_ip
      */
     public function testValidIp($ip, $expectedVal)
     {
-        $md = new Get_Client_Ip();
+        $md = new GetClientIp();
         $this->assertSame($expectedVal, $md->validate_ip($ip));
     }
 
@@ -97,12 +97,12 @@ class Get_Client_Ip_Test extends PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider ipProvider
-     * @covers Get_Client_Ip::setServerHeaders
-     * @covers Get_Client_Ip::getClientIp
+     * @covers GetClientIp::setServerHeaders
+     * @covers GetClientIp::getClientIp
      */
     public function testGetClientIp($headers, $expectedIp)
     {
-        $md = new Get_Client_Ip($headers);
+        $md = new GetClientIp($headers);
         $this->assertSame($expectedIp, $md->getClientIp());
     }
 }

@@ -3,19 +3,19 @@
  * Get Client Ip Library
  * =====================
  *
- * Get_Client_Ip is a lightweight PHP class for detecting client real ip address.
+ * GetClientIp is a lightweight PHP class for detecting client real ip address.
  * It uses specific HTTP headers to detect the real/original (not private/reserved range) client ip address.
  *
  * @author      Aleksey Pevnev <pevnev@mail.ru>
  *
  * @license     Code and contributions have 'MIT License'
  *
- * @link        GitHub Repo:  https://github.com/worm/Get_Client_Ip
+ * @link        GitHub Repo:  https://github.com/worm/GetClientIp
  *
  * @version     1.0.0
  */
 
-class Get_Client_Ip
+class GetClientIp
 {
     /**
      * Stores the version number of the current release.
@@ -54,9 +54,7 @@ class Get_Client_Ip
      * @param array  $headers   Specify the headers as injection. Should be PHP _SERVER flavored.
      *                          If left empty, will use the global _SERVER['HTTP_*'] vars instead.
      */
-    public function __construct(
-        array $headers = null
-    ) {
+    public function __construct(array $headers = null) {
         $this->setServerHeaders($headers);
     }
 
@@ -88,7 +86,7 @@ class Get_Client_Ip
 
         // Only headers with IP.
         foreach (self::getIpServerHeaders() as $key) {
-            if (array_key_exists($key, $serverHeaders) === true) {
+            if (array_key_exists($key, $serverHeaders)) {
                 $this->serverHeaders[$key] = $serverHeaders[$key];
             }
         }
