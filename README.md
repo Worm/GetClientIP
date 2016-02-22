@@ -1,6 +1,8 @@
 *GetClientIp is a lightweight PHP class for get real/original client IP address, without proxy as opera mini and other.
 It uses the specific $_SERVER headers to detect client ip address.*
 
+## Composer install
+
 ```
 composer require worm/getclientiplib
 ```
