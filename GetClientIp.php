@@ -5,7 +5,7 @@
  *
  * GetClientIp is a lightweight PHP class for detecting client IP address.
  * It uses specific HTTP headers to detect the real/original
- * (not private/reserved range) client ip address not final proxy IP.
+ * (not private/reserved range) client ip address not final proxy IP
  *
  * @author      Aleksey Pevnev <pevnev@mail.ru>
  *
