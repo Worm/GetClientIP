@@ -5,6 +5,7 @@
   "keywords": ["ip", "ip address", "ip detect", "ip detector", "php ip detect", "detect ip client"],
   "homepage": "https://github.com/worm/GetClientIp",
   "license": "MIT",
+  "version": "1.0.0",
   "authors": [
     {
       "name": "Pevnev Alex",
