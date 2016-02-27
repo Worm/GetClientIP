@@ -105,4 +105,15 @@ class GetClientIpTest extends PHPUnit_Framework_TestCase
         $md = new GetClientIp($headers);
         $this->assertSame($expectedIp, $md->getClientIp());
     }
+
+    /**
+     * @dataProvider ipProvider
+     * @covers GetClientIp::setServerHeaders
+     * @covers GetClientIp::getLongClientIp
+     */
+    public function testGetLongClientIp($headers, $expectedIp)
+    {
+        $md = new GetClientIp($headers);
+        $this->assertSame(ip2long($expectedIp), $md->getLongClientIp());
+    }
 }

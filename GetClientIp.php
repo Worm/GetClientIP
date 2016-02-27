@@ -149,4 +149,16 @@ class GetClientIp
 
         return false;
     }
+
+    /**
+     * Get the real valid long IP address
+     *
+     * @return bool|string
+     */
+    public function getLongClientIp()
+    {
+        $ip = self::getClientIp();
+
+        return $ip ? ip2long($ip) : false;
+    }
 }
