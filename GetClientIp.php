@@ -13,7 +13,7 @@
  *
  * @link        GitHub Repo:  https://github.com/worm/GetClientIp
  *
- * @version     1.0.2
+ * @version     1.0.3
  */
 
 class GetClientIp
@@ -21,7 +21,7 @@ class GetClientIp
     /**
      * Stores the version number of the current release.
      */
-    const VERSION   = '1.0.2';
+    const VERSION   = '1.0.3';
 
     /**
      * All possible HTTP headers that represent the
