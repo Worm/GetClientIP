@@ -21,7 +21,7 @@ class GetClientIp
     /**
      * Stores the version number of the current release.
      */
-    const VERSION   = '1.0.1';
+    const VERSION   = '1.0.2';
 
     /**
      * All possible HTTP headers that represent the
@@ -49,6 +49,9 @@ class GetClientIp
      */
     protected $serverHeaders = array();
 
+    protected $clientIP = null;
+    protected $clientLongIP = null;
+
     /**
      * Construct an instance of this class.
      *
@@ -56,6 +59,8 @@ class GetClientIp
      */
     public function __construct($headers = []) {
         $this->setServerHeaders($headers);
+        $this->setClientIp();
+        $this->SetLongClientIp($this->getClientIp());
     }
 
     /**
@@ -73,7 +78,7 @@ class GetClientIp
      *
      * @param array $serverHeaders The headers to set. If null, then using PHP _SERVER to extract the headers.
      */
-    public function setServerHeaders($serverHeaders = [])
+    protected function setServerHeaders($serverHeaders = [])
     {
         // use global _SERVER if $httpHeaders aren't defined
         if (!is_array($serverHeaders) || !count($serverHeaders)) {
@@ -96,7 +101,7 @@ class GetClientIp
      *
      * @return array
      */
-    public function getServerHeaders()
+    protected function getServerHeaders()
     {
         return $this->serverHeaders;
     }
@@ -107,7 +112,7 @@ class GetClientIp
      *
      * @return array List of SERVER headers.
      */
-    public function getIpServerHeaders()
+    protected function getIpServerHeaders()
     {
         return self::$ipServerHeaders;
     }
@@ -130,35 +135,58 @@ class GetClientIp
     }
 
     /**
-     * Get the real valid IP address from serverHeaders
+     * Set the real valid IP address from serverHeaders
      *
      * @return bool|string
      */
-    public function getClientIp()
+    protected function setClientIp()
     {
         foreach ($this->getIpServerHeaders() as $ipHeader) {
             if (isset($this->serverHeaders[$ipHeader])) {
                 foreach (explode(',', $this->serverHeaders[$ipHeader]) as $ip) {
                     $ip = trim($ip);
                     if (self::validate_ip($ip)) {
+                        $this->clientIP = $ip;
                         return $ip;
                     }
                 }
             }
         }
-
         return false;
     }
 
     /**
-     * Get the real valid long IP address
+     * Set the real valid long IP address
      *
-     * @return bool|string
+     * @param null $ip IPv4
+     * @return bool|null
+     */
+    protected function SetLongClientIp($ip = null)
+    {
+        if (self::validate_ip($ip)) {
+            $this->clientLongIP = ip2long($ip);
+            return $ip;
+        }
+        return false;
+    }
+
+    /**
+     * Return Client IPv4
+     *
+     * @return mixed
+     */
+    public function getClientIp()
+    {
+        return $this->clientIP;
+    }
+
+    /**
+     * Return Client LongIPv4
+     *
+     * @return mixed
      */
     public function getLongClientIp()
     {
-        $ip = self::getClientIp();
-
-        return $ip ? ip2long($ip) : false;
+        return $this->clientLongIP;
     }
 }
