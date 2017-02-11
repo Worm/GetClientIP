@@ -13,7 +13,7 @@
  *
  * @link        GitHub Repo:  https://github.com/worm/GetClientIp
  *
- * @version     1.0.3
+ * @version     1.0.4
  */
 
 class GetClientIp
@@ -21,7 +21,7 @@ class GetClientIp
     /**
      * Stores the version number of the current release.
      */
-    const VERSION   = '1.0.3';
+    const VERSION   = '1.0.4';
 
     /**
      * All possible HTTP headers that represent the
@@ -164,7 +164,7 @@ class GetClientIp
     protected function SetLongClientIp($ip = null)
     {
         if (self::validate_ip($ip)) {
-            $this->clientLongIP = ip2long($ip);
+            $this->clientLongIP = sprintf('%u', ip2long($ip)); //fix bug to ip2long returning negative val
             return $ip;
         }
         return false;
