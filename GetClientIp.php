@@ -1,27 +1,25 @@
 <?php
 /**
  * Get Client Ip Library
- * =====================
+ * =====================.
  *
  * GetClientIp is a lightweight PHP class for detecting client IP address.
  * It uses specific HTTP headers to detect the real/original
  * (not private/reserved range) client ip address not final proxy IP
  *
  * @author      Aleksey Pevnev <pevnev@mail.ru>
- *
  * @license     Code and contributions have 'MIT License'
  *
  * @link        GitHub Repo:  https://github.com/worm/GetClientIp
  *
  * @version     1.0.7
  */
-
 class GetClientIp
 {
     /**
      * Stores the version number of the current release.
      */
-    const VERSION   = '1.0.7';
+    const VERSION = '1.0.7';
 
     /**
      * All possible HTTP headers that represent the
@@ -29,7 +27,7 @@ class GetClientIp
      *
      * @var array
      */
-    protected static $ipServerHeaders = array(
+    protected static $ipServerHeaders = [
         'HTTP_X_FORWARDED_FOR',
         'X_FORWARDED_FOR',
         'HTTP_X_FORWARDED',
@@ -39,15 +37,15 @@ class GetClientIp
         'X-REAL-IP',
         'VIA',
         'HTTP_CLIENT_IP',
-        'REMOTE_ADDR'
-    );
+        'REMOTE_ADDR',
+    ];
 
     /**
      * HTTP headers in the PHP-flavor.
      *
      * @var array
      */
-    protected $serverHeaders = array();
+    protected $serverHeaders = [];
 
     protected $clientIP = null;
     protected $clientLongIP = null;
@@ -55,9 +53,10 @@ class GetClientIp
     /**
      * Construct an instance of this class.
      *
-     * @param array  $headers   Specify the headers as injection.
+     * @param array $headers Specify the headers as injection.
      */
-    public function __construct($headers = []) {
+    public function __construct($headers = [])
+    {
         $this->setServerHeaders($headers);
         $this->setClientIp();
         $this->SetLongClientIp($this->getClientIp());
@@ -86,7 +85,7 @@ class GetClientIp
         }
 
         // clear existing headers
-        $this->serverHeaders = array();
+        $this->serverHeaders = [];
 
         // Only headers with IP.
         foreach (self::getIpServerHeaders() as $key) {
@@ -135,7 +134,7 @@ class GetClientIp
     }
 
     /**
-     * Set the real valid IP address from serverHeaders
+     * Set the real valid IP address from serverHeaders.
      *
      * @return bool|string
      */
@@ -147,18 +146,21 @@ class GetClientIp
                     $ip = trim($ip);
                     if (self::validate_ip($ip)) {
                         $this->clientIP = $ip;
+
                         return $ip;
                     }
                 }
             }
         }
+
         return false;
     }
 
     /**
-     * Set the real valid long IP address
+     * Set the real valid long IP address.
      *
      * @param null $ip IPv4
+     *
      * @return bool|null
      */
     protected function SetLongClientIp($ip = null)
@@ -167,11 +169,12 @@ class GetClientIp
             $this->clientLongIP = sprintf('%u', ip2long($ip)); //fix bug to ip2long returning negative val
             return $this->clientLongIP;
         }
+
         return false;
     }
 
     /**
-     * Return Client IPv4
+     * Return Client IPv4.
      *
      * @return mixed
      */
@@ -181,7 +184,7 @@ class GetClientIp
     }
 
     /**
-     * Return Client LongIPv4
+     * Return Client LongIPv4.
      *
      * @return mixed
      */
